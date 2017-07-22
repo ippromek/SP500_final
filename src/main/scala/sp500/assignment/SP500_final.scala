@@ -16,16 +16,16 @@ import org.apache.spark.sql.types._
 
 final case class Record(Date: Date, SP500: Option[Double])
 
-object Main extends InitSpark {
+object SP500_final extends InitSpark {
   import spark.implicits._
 
   def main(args: Array[String]):Unit = {
 
-   // val filePath="src/main/resources/SP500.csv"
-   //  val confidenceLevel=0.90
+    val filePath="src/main/resources/SP500.csv"
+    val confidenceLevel=0.90
 
-    val filePath=args{0}
-    val confidenceLevel=args{1}.toDouble
+    //val filePath=args{0}
+    //val confidenceLevel=args{1}.toDouble
 
     val df_final: DataFrame = readAndTransform(filePath)
     val ci = calcMeanCI(df_final, confidenceLevel)
