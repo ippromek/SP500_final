@@ -9,7 +9,7 @@ import org.apache.spark.sql.SparkSession
 
 trait InitSpark {
   val spark: SparkSession = SparkSession.builder()
-    .appName("SP500_final")
+    .appName("Confidence interval for SP500 dataset")
     .master("local[*]")
     .getOrCreate()
 
@@ -24,7 +24,7 @@ trait InitSpark {
 
   def readerWithoutHeader = spark.read
     .option("header",true)
-    .option("inferSchema", true)
+    .option("inferSchema", false)
     .option("mode", "DROPMALFORMED")
     .option("dateFormat", "MM/dd/yyyy")
 
