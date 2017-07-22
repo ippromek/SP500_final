@@ -2,17 +2,16 @@
   * Created by oleg.baydakov on 22/07/2017.
   */
 
-package sp500.assignment.org
-
+package sp500.assignment
 
 import java.sql.Date
 
-import org.apache.spark.sql.functions._
-import org.apache.spark.sql.types._
-import org.apache.spark.sql.expressions.{Window, WindowSpec}
-import org.apache.spark.sql._
 import org.apache.commons.math3.distribution.TDistribution
 import org.apache.commons.math3.exception.MathIllegalArgumentException
+import org.apache.spark.sql._
+import org.apache.spark.sql.expressions.{Window, WindowSpec}
+import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types._
 
 
 final case class Record(Date: Date, SP500: Option[Double])

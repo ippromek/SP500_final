@@ -2,7 +2,7 @@
   * Created by oleg.baydakov on 22/07/2017.
   */
 
-package sp500.assignment.org
+package sp500.assignment
 
 import org.apache.log4j.{Level, LogManager, Logger}
 import org.apache.spark.sql.SparkSession
@@ -11,7 +11,6 @@ trait InitSpark {
   val spark: SparkSession = SparkSession.builder()
     .appName("SP500_final")
     .master("local[*]")
-   // .config("option", "some-value")
     .getOrCreate()
 
   val sc = spark.sparkContext
@@ -27,6 +26,7 @@ trait InitSpark {
     .option("header",true)
     .option("inferSchema", true)
     .option("mode", "DROPMALFORMED")
+    .option("dateFormat", "MM/dd/yyyy")
 
 
   private def init = {
