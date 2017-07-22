@@ -16,8 +16,9 @@ trait InitSpark {
 
   def reader = spark.read
     .option("header",true)
-    .option("inferSchema", true)
+    .option("inferSchema", false)
     .option("mode", "DROPMALFORMED")
+    .option("dateFormat", "dd/MM/yyyy")
 
   def readerWithoutHeader = spark.read
     .option("header",true)
