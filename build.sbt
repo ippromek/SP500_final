@@ -8,8 +8,9 @@ val sparkVersion = "2.1.0"
 
 libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-core" % sparkVersion,
-  "org.apache.spark" %% "spark-mllib" % sparkVersion
+  "org.apache.spark" %% "spark-mllib" % sparkVersion,
+  "org.apache.spark" % "spark-sql_2.11" % sparkVersion
 )
 
-libraryDependencies += "org.apache.spark" % "spark-sql_2.11" % "2.1.0"
+//libraryDependencies += "org.apache.spark" % "spark-sql_2.11" % "2.1.0"
         
