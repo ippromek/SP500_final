@@ -1,6 +1,9 @@
 /**
   * Created by oleg.baydakov on 22/07/2017.
   */
+
+package sp500.assignment.org
+
 import org.apache.log4j.{Level, LogManager, Logger}
 import org.apache.spark.sql.SparkSession
 

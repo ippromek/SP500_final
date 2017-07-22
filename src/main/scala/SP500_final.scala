@@ -1,6 +1,10 @@
 /**
   * Created by oleg.baydakov on 22/07/2017.
   */
+
+package sp500.assignment.org
+
+
 import java.sql.Date
 
 import org.apache.spark.sql.functions._
