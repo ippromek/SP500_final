@@ -20,10 +20,8 @@ object SP500_final extends InitSpark {
   import spark.implicits._
 
   def main(args: Array[String]):Unit = {
-
     val filePath="src/main/resources/SP500.csv"
     val confidenceLevel=0.90
-
     //val filePath=args{0}
     //val confidenceLevel=args{1}.toDouble
 
@@ -31,10 +29,8 @@ object SP500_final extends InitSpark {
     val ci = calcMeanCI(df_final, confidenceLevel)
 
     println(f"For confidence level $confidenceLevel%s confidence interval is [${ci._1}%.4f , ${ci._2}%.4f]")
-
     close
   }
-
   def readAndTransform(filePath:String):DataFrame =
   {
     val schema: StructType = StructType(Array(StructField("Date", DateType, false),
@@ -52,7 +48,6 @@ object SP500_final extends InitSpark {
       .na.drop()
       .withColumn("DiffPercent", round(differencePercent.cast(FloatType),2))
       .select(col("DiffPercent"))
-
     dfDifference
   }
 
@@ -62,7 +57,6 @@ object SP500_final extends InitSpark {
       val tDist: TDistribution = new TDistribution(stats.count() - 1)
       // Calculate critical value
       val critVal: Double = tDist.inverseCumulativeProbability(1.0 - (1 - level) / 2)
-
       // Calculate confidence interval
       val stddev: Double =stats.agg(stddev_pop($"DiffPercent")).head().getDouble(0)
       val mean: Double =stats.agg(avg($"DiffPercent")).head().getDouble(0)
