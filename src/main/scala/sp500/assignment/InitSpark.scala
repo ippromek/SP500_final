@@ -9,7 +9,7 @@ import org.apache.spark.sql.SparkSession
 
 trait InitSpark {
   val spark: SparkSession = SparkSession.builder()
-    .appName("Confidence interval for SP500 dataset")
+    .appName("SP500_final")
     .master("local[*]")
     .getOrCreate()
 
