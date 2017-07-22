@@ -28,13 +28,13 @@ object SP500_final extends InitSpark {
     val df_final: DataFrame = readAndTransform(filePath)
     val ci = calcMeanCI(df_final, confidenceLevel)
 
-    println(f"For confidence level $confidenceLevel%s confidence interval is [${ci._1}%.4f , ${ci._2}%.4f]")
+    println(f"For confidence level $confidenceLevel%s confidence interval is [${ci._1}%.4f%% , ${ci._2}%.4f%%]")
     close
   }
   def readAndTransform(filePath:String):DataFrame =
   {
     val schema: StructType = StructType(Array(StructField("Date", DateType, false),
-                                        StructField("SP500", DoubleType, false)))
+                                              StructField("SP500", DoubleType, false)))
     // read data from csv file
     val df: Dataset[Record] = reader.schema(schema).csv(filePath).na.drop().as[Record]
 
