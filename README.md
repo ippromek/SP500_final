@@ -23,7 +23,7 @@ Final dataset consists of only one column with the percentage values.
 
 ***Step #3***
 
-Using Dataset column values calculate lower and upper thresholds of  the confidence interval for given confidence level. 
+For dataset column calculate lower and upper thresholds of  the confidence interval for given confidence level. 
 
 <img src="https://s-media-cache-ak0.pinimg.com/564x/a0/3c/65/a03c650ea3ae2f6ccccfba82ba6ef5bd.jpg" width="248">
 
