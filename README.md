@@ -10,8 +10,39 @@ You are required to write a Spark application in Java or Scala to find out a ran
 
 Dataset can be found here [Link](https://fred.stlouisfed.org/series/SP500/downloaddata)
 
-**Step #1**
+**Solution**
 
-**Step #2**
+***Step #1***
 
-**Step #3**
+Read csv file with feed data and convert it into Spark Dataset with case class records
+
+***Step #2***
+
+Transform dataset by calculating percent of difference between a current raw and previous one for column "SP500". 
+Final dataset consists of only one column with the percentage values.
+
+***Step #3***
+
+For dataset column calculate lower and upper thresholds of  the confidence interval for given confidence level: 
+
+<img src="https://s-media-cache-ak0.pinimg.com/564x/a0/3c/65/a03c650ea3ae2f6ccccfba82ba6ef5bd.jpg" width="100">
+
+For given confidence level Z value calculated from T Distribution with N-1 degrees of freedom:
+
+<img src="http://www.biochemia-medica.com/system/files/18(2)_Simundic_lessons_tablica1.jpg"  width="250">
+
+**Unit Testing**
+
+Testing process was executed with artificailly created test file (in the project resource folder). [ScalaTest](http://www.scalatest.org/) library was used to write the test cases.
+
+***Unit #1***
+
+Read test data file and calucalte mean value for "SP500" column. 	Test target  is to check "readFile" method.
+
+***Unit #2***
+
+Read test data file, add the new column to store percent of difference and calucalte mean value for "DiffPercent" column. Objective of testing is to check "transformDataframe" method.
+
+***Unit #3***
+
+Calculate confidence interval for the test dataset ("DiffPercent" column) with confidence level equals 0.9. Test target is to check "calcMeanCI" method.
