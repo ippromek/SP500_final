@@ -33,7 +33,7 @@ For given confidence level Z value calculated from T Distribution with N-1 degre
 
 **Unit Testing**
 
-Testing process was executed with artificailly created test file (in the project resource folder).
+Testing process was executed with artificailly created test file (in the project resource folder). [ScalaTest](http://www.scalatest.org/) library was used to write the test cases.
 
 ***Unit #1***
 
@@ -45,4 +45,4 @@ Read test data file, add the new column to store percent of difference and caluc
 
 ***Unit #3***
 
-Calculate confidence interval for the test dataset ("DiffPercent" column) with confidence level equals 0.9. TEst target is to check "calcMeanCI" method.
+Calculate confidence interval for the test dataset ("DiffPercent" column) with confidence level equals 0.9. Test target is to check "calcMeanCI" method.
