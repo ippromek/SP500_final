@@ -14,7 +14,7 @@ Dataset can be found here [Link](https://fred.stlouisfed.org/series/SP500/downlo
 
 ***Step #1***
 
-Read csv file with feed data and convert it into Spark Dataset with case class records
+Create Apache Spark instance via trait. Read csv file with feed data and convert it into Spark Dataset with case class records. 
 
 ***Step #2***
 
