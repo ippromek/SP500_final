@@ -25,11 +25,11 @@ object SP500_final extends InitSpark {
     // First, ensure there are 2 args
     if (args.length != 2) throw new IllegalArgumentException("Exactly 2 parameters required !")
 
-    //val filePath=args(0)
-    //implicit val confidenceLevel=args(1).toDouble
+    val filePath=args(0)
+    implicit val confidenceLevel=args(1).toDouble
 
-    val filePath = "src/main/resources/SP500_test.csv"
-    implicit val confidenceLevel:Double = 0.9
+    //val filePath = "src/main/resources/SP500_test.csv"
+    //implicit val confidenceLevel:Double = 0.9
 
     // Then check args values
     require(confidenceLevel >0 && confidenceLevel<1, "Confidence level should be between 0 and 1")
