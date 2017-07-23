@@ -25,19 +25,19 @@ object SP500_final extends InitSpark {
     // First, ensure there are 2 args
     if (args.length != 2) throw new IllegalArgumentException("Exactly 2 parameters required !")
 
-    val filePath=args(0)
-    val confidenceLevel=args(1).toDouble
+    //val filePath=args(0)
+    //implicit val confidenceLevel=args(1).toDouble
 
-    //val filePath = "src/main/resources/SP500.csv"
-    //val confidenceLevel:Double = 0.9
+    val filePath = "src/main/resources/SP500_test.csv"
+    implicit val confidenceLevel:Double = 0.9
 
     // Then check args values
     require(confidenceLevel >0 && confidenceLevel<1, "Confidence level should be between 0 and 1")
     if (!new File(filePath).exists) throw new FileNotFoundException("File does not exist: "+filePath)
 
-    // Then run the main process
-    val readAndTransform: (String) => DataFrame = readFile _ andThen transformDataframe
-    val ci = calcMeanCI(readAndTransform(filePath), confidenceLevel)
+    // Then run the main process via function composition
+    val readTransformCalc = readFile _ andThen transformDataframe andThen calcMeanCI
+    val ci = readTransformCalc(filePath)
 
     println(f"For confidence level $confidenceLevel%s confidence interval is [${ci._1}%.4f%% , ${ci._2}%.4f%%]")
     close
@@ -85,16 +85,16 @@ object SP500_final extends InitSpark {
   /**
     *
     * @param df - Dataframe with one column with the values to be processed
-    * @param level - confidence level (between 0 and 1) to calculate confidence interval
+    * @param confidenceLevel - confidence level (between 0 and 1) to calculate confidence interval
     * @return
     */
-  def calcMeanCI(df: DataFrame, level: Double): (Double, Double) =
+  def calcMeanCI(df: DataFrame)(implicit confidenceLevel:Double): (Double, Double) =
     try {
       // Create T Distribution with N-1 degrees of freedom
       val tDist: TDistribution = new TDistribution(df.count() - 1)
       // Calculate critical value
       val critVal: Double = {
-        tDist.inverseCumulativeProbability(1.0 - (1 - level) / 2)
+        tDist.inverseCumulativeProbability(1.0 - (1 - confidenceLevel) / 2)
       }
       // Calculate standard deviation
       val stddev: Double = {
