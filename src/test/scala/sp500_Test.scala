@@ -5,8 +5,6 @@ import org.scalatest.FunSuite
 import sp500.assignment.{Record, SP500_final}
 import org.apache.spark.sql.{DataFrame, _}
 import org.apache.spark.sql.functions._
-//import org.apache.spark.sql.types._
-
 
 class sp500_Test extends FunSuite  {
 
