@@ -21,3 +21,7 @@ Final dataset consists of only one column with the percentage values.
 Calculate lower and upper thresholds for the confidence interval based on given confidence level. 
 
 <img src="http://pad3.whstatic.com/images/thumb/9/98/Calculate-Confidence-Interval-Step-5-Version-4.jpg/aid1383548-v4-728px-Calculate-Confidence-Interval-Step-5-Version-4.jpg" width="248">
+
+For give confidence level Z value calculated from T Distribution with N-1 degrees of freedom:
+
+<img src="http://www.biochemia-medica.com/system/files/18(2)_Simundic_lessons_tablica1.jpg"  width="448">
