@@ -25,13 +25,14 @@ Final dataset consists of only one column with the percentage values.
 
 Using Dataset column values calculate lower and upper thresholds of  the confidence interval for given confidence level. 
 
-<img src="http://pad3.whstatic.com/images/thumb/9/98/Calculate-Confidence-Interval-Step-5-Version-4.jpg/aid1383548-v4-728px-Calculate-Confidence-Interval-Step-5-Version-4.jpg" width="248">
+<img src="https://s-media-cache-ak0.pinimg.com/564x/a0/3c/65/a03c650ea3ae2f6ccccfba82ba6ef5bd.jpg" width="248">
 
 For given confidence level Z value calculated from T Distribution with N-1 degrees of freedom:
 
 <img src="http://www.biochemia-medica.com/system/files/18(2)_Simundic_lessons_tablica1.jpg"  width="448">
 
 **Unit Testing**
+
 Testing process was executed with artificailly created test file (in the project resource folder).
 
 ***Unit #1***
