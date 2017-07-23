@@ -36,7 +36,9 @@ object SP500_final extends InitSpark {
     if (!new File(filePath).exists) throw new FileNotFoundException("File does not exist: "+filePath)
 
     // Then run the main process via function composition
-    val readTransformCalc = readFile _ andThen transformDataframe andThen calcMeanCI
+    val readTransformCalc: (String) => (Double, Double) = {
+      readFile _ andThen transformDataframe andThen calcMeanCI
+    }
     val ci = readTransformCalc(filePath)
 
     println(f"For confidence level $confidenceLevel%s confidence interval is [${ci._1}%.4f%% , ${ci._2}%.4f%%]")
