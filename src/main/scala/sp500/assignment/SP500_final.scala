@@ -24,19 +24,20 @@ object SP500_final extends InitSpark {
 
     // First, ensure there are 2 args
     if (args.length != 2) throw new IllegalArgumentException("Exactly 2 parameters required !")
-    //val filePath=args(0)
-    //val confidenceLevel=args(1).toDouble
 
-    val filePath = "src/main/resources/SP500_test.csv"
-    implicit val confidenceLevel:Double = 0.9
+    val filePath=args(0)
+    val confidenceLevel=args(1).toDouble
+
+    //val filePath = "src/main/resources/SP500.csv"
+    //val confidenceLevel:Double = 0.9
 
     // Then check args values
     require(confidenceLevel >0 && confidenceLevel<1, "Confidence level should be between 0 and 1")
     if (!new File(filePath).exists) throw new FileNotFoundException("File does not exist: "+filePath)
 
     // Then run the main process
-    val readTransform: (String) => DataFrame = readFile _ andThen transformDataframe
-    val ci = calcMeanCI(readTransform(filePath), confidenceLevel)
+    val readAndTransform: (String) => DataFrame = readFile _ andThen transformDataframe
+    val ci = calcMeanCI(readAndTransform(filePath), confidenceLevel)
 
     println(f"For confidence level $confidenceLevel%s confidence interval is [${ci._1}%.4f%% , ${ci._2}%.4f%%]")
     close
@@ -49,7 +50,8 @@ object SP500_final extends InitSpark {
     */
   def readFile(filePath: String): Dataset[Record] = {
     val schema: StructType = {
-      StructType(Array(StructField("Date", DateType, false), StructField("SP500", DoubleType, false)))
+      StructType(Array(StructField("Date", DateType, nullable = false),
+                        StructField("SP500", DoubleType, nullable = false)))
     }
     // read data from csv file
     val df: Dataset[Record] = reader
