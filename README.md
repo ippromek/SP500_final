@@ -25,11 +25,11 @@ Final dataset consists of only one column with the percentage values.
 
 For dataset column calculate lower and upper thresholds of  the confidence interval for given confidence level. 
 
-<img src="https://s-media-cache-ak0.pinimg.com/564x/a0/3c/65/a03c650ea3ae2f6ccccfba82ba6ef5bd.jpg" width="200">
+<img src="https://s-media-cache-ak0.pinimg.com/564x/a0/3c/65/a03c650ea3ae2f6ccccfba82ba6ef5bd.jpg" width="150">
 
 For given confidence level Z value calculated from T Distribution with N-1 degrees of freedom:
 
-<img src="http://www.biochemia-medica.com/system/files/18(2)_Simundic_lessons_tablica1.jpg"  width="448">
+<img src="http://www.biochemia-medica.com/system/files/18(2)_Simundic_lessons_tablica1.jpg"  width="250">
 
 **Unit Testing**
 
