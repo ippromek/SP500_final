@@ -31,6 +31,8 @@ For given confidence level Z value calculated from T Distribution with N-1 degre
 
 <img src="http://www.biochemia-medica.com/system/files/18(2)_Simundic_lessons_tablica1.jpg"  width="250">
 
+Confidence interval is calculated via Scala function composition  - Step1 andThen Step2 andThen Step3
+
 **Unit Testing**
 
 Testing process was executed with artificailly created test file (in the project resource folder). [ScalaTest](http://www.scalatest.org/) library was used to write the test cases.
