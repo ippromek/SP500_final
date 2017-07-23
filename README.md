@@ -11,7 +11,13 @@ You are required to write a Spark application in Java or Scala to find out a ran
 Dataset can be found here [Link](https://fred.stlouisfed.org/series/SP500/downloaddata)
 
 **Step #1**
+Read scv file with feed data and convert it into Spark Dataset with case class
 
 **Step #2**
+Dataset transformation includes calculating percent of difference between a current raw and previous one for column "SP500". 
+Final dataset consists of only one column with the percentage values.
 
 **Step #3**
+Calculate lower and upper thresholds for the confidence interval based given confidence level. Calculation perfomrs using formula
+
+![Formula](http://www.wikihow.com/Calculate-Confidence-Interval#/Image:Calculate-Confidence-Interval-Step-3-Version-4.jpg)
