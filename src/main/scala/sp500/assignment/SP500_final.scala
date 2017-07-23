@@ -10,7 +10,7 @@ import java.sql.Date
 
 import org.apache.commons.math3.distribution.TDistribution
 import org.apache.commons.math3.exception.MathIllegalArgumentException
-import org.apache.spark.sql._
+import org.apache.spark.sql.{DataFrame, _}
 import org.apache.spark.sql.expressions.{Window, WindowSpec}
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
@@ -28,18 +28,16 @@ object SP500_final extends InitSpark {
     //val filePath=args(0)
     //val confidenceLevel=args(1).toDouble
 
-    val filePath = "src/main/resources/SP500.csv"
-    val confidenceLevel = 0.9
+    val filePath = "src/main/resources/SP500_test.csv"
+    implicit val confidenceLevel:Double = 0.9
 
     // Then check args values
     require(confidenceLevel >0 && confidenceLevel<1, "Confidence level should be between 0 and 1")
     if (!new File(filePath).exists) throw new FileNotFoundException("File does not exist: "+filePath)
 
-
     // Then run the main process
-    val df: Dataset[Record] = readFile(filePath)
-    val dfFinal: DataFrame = transformDataframe(df)
-    val ci = calcMeanCI(dfFinal, confidenceLevel)
+    val readTransform: (String) => DataFrame = readFile _ andThen transformDataframe
+    val ci = calcMeanCI(readTransform(filePath), confidenceLevel)
 
     println(f"For confidence level $confidenceLevel%s confidence interval is [${ci._1}%.4f%% , ${ci._2}%.4f%%]")
     close
@@ -51,9 +49,15 @@ object SP500_final extends InitSpark {
     * @return - Spark Dataset with Raw[Record]
     */
   def readFile(filePath: String): Dataset[Record] = {
-    val schema: StructType = StructType(Array(StructField("Date", DateType, false), StructField("SP500", DoubleType, false)))
+    val schema: StructType = {
+      StructType(Array(StructField("Date", DateType, false), StructField("SP500", DoubleType, false)))
+    }
     // read data from csv file
-    val df: Dataset[Record] = reader.schema(schema).csv(filePath).na.drop().as[Record]
+    val df: Dataset[Record] = reader
+                              .schema(schema).csv(filePath)
+                              .na.drop()
+                              .as[Record]
+                              .filter("SP500 > 0")
     df
   }
 
@@ -71,9 +75,9 @@ object SP500_final extends InitSpark {
 
     // calculate values in the new columns and keep only percent of difference
     val dfDifference: DataFrame = df.withColumn("PrevSP500", lagCol)
-      .na.drop()
-      .withColumn("DiffPercent", round(differencePercent.cast(FloatType), 2))
-      .select(col("DiffPercent"))
+                                    .na.drop()
+                                    .withColumn("DiffPercent", round(differencePercent.cast(FloatType), 2))
+                                    .select(col("DiffPercent"))
     dfDifference
   }
 
@@ -83,17 +87,24 @@ object SP500_final extends InitSpark {
     * @param level - confidence level (between 0 and 1) to calculate confidence interval
     * @return
     */
-  def calcMeanCI(df: DataFrame, level: Double): Tuple2[Double, Double] =
+  def calcMeanCI(df: DataFrame, level: Double): (Double, Double) =
     try {
       // Create T Distribution with N-1 degrees of freedom
       val tDist: TDistribution = new TDistribution(df.count() - 1)
       // Calculate critical value
-      val critVal: Double = tDist.inverseCumulativeProbability(1.0 - (1 - level) / 2)
-      // Calculate confidence interval
-      val stddev: Double = df.agg(stddev_pop($"DiffPercent")).head().getDouble(0)
-      val mean: Double = df.agg(avg($"DiffPercent")).head().getDouble(0)
+      val critVal: Double = {
+        tDist.inverseCumulativeProbability(1.0 - (1 - level) / 2)
+      }
+      // Calculate standard deviation
+      val stddev: Double = {
+        df.agg(stddev_pop($"DiffPercent")).head().getDouble(0)
+      }
+      // Calculate standard mean
+      val mean: Double = {
+        df.agg(avg($"DiffPercent")).head().getDouble(0)
+      }
       val sqrtSampleSize: Double = Math.sqrt(df.count())
-
+      // Calculate confidence interval
       val ciLower: Double = mean - critVal * stddev / sqrtSampleSize
       val ciUpper: Double = mean + critVal * stddev / sqrtSampleSize
       (ciLower, ciUpper)
