@@ -1,5 +1,5 @@
 /**
-  * Created by oleg.baydakov on 22/07/2017.
+  * Created by oleg.baydakov on 23/07/2017.
   */
 
 package sp500.assignment
