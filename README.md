@@ -14,11 +14,11 @@ Dataset can be found here [Link](https://fred.stlouisfed.org/series/SP500/downlo
 
 ***Step #1***
 
-Read scv file with feed data and convert it into Spark Dataset with case class
+Read csv file with feed data and convert it into Spark Dataset with case class records
 
 ***Step #2***
 
-Dataset transformation includes calculating percent of difference between a current raw and previous one for column "SP500". 
+Transform dataset by calculating percent of difference between a current raw and previous one for column "SP500". 
 Final dataset consists of only one column with the percentage values.
 
 ***Step #3***
