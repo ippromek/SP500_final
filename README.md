@@ -23,7 +23,7 @@ Final dataset consists of only one column with the percentage values.
 
 ***Step #3***
 
-Calculate lower and upper thresholds for the confidence interval based on given confidence level. 
+Using Dataset column values calculate lower and upper thresholds of  the confidence interval for given confidence level. 
 
 <img src="http://pad3.whstatic.com/images/thumb/9/98/Calculate-Confidence-Interval-Step-5-Version-4.jpg/aid1383548-v4-728px-Calculate-Confidence-Interval-Step-5-Version-4.jpg" width="248">
 
@@ -31,10 +31,17 @@ For given confidence level Z value calculated from T Distribution with N-1 degre
 
 <img src="http://www.biochemia-medica.com/system/files/18(2)_Simundic_lessons_tablica1.jpg"  width="448">
 
-** Unit Testing**
+**Unit Testing**
+Testing process was executed with artificailly created test file (in the project resource folder).
 
 ***Unit #1***
 
+Read test data file and calucalte mean value for "SP500" column. 	Test target  is to check "readFile" method.
+
 ***Unit #2***
 
+Read test data file, add the new column to store percent of difference and calucalte mean value for "DiffPercent" column. Objective of testing is to check "transformDataframe" method.
+
 ***Unit #3***
+
+Calculate confidence interval for the test dataset ("DiffPercent" column) with confidence level equals 0.9. TEst target is to check "calcMeanCI" method.
