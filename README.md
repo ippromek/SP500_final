@@ -20,4 +20,4 @@ Final dataset consists of only one column with the percentage values.
 **Step #3**
 Calculate lower and upper thresholds for the confidence interval based given confidence level. Calculation perfomrs using formula
 
-![Formula](http://www.wikihow.com/Calculate-Confidence-Interval#/Image:Calculate-Confidence-Interval-Step-3-Version-4.jpg)
+![Formula](http://pad1.whstatic.com/images/thumb/3/37/Calculate-Confidence-Interval-Step-3-Version-4.jpg/aid1383548-v4-728px-Calculate-Confidence-Interval-Step-3-Version-4.jpg)
