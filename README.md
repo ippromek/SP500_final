@@ -18,6 +18,6 @@ Dataset transformation includes calculating percent of difference between a curr
 Final dataset consists of only one column with the percentage values.
 
 **Step #3**
-Calculate lower and upper thresholds for the confidence interval based given confidence level. Calculation perfomrs using formula
+Calculate lower and upper thresholds for the confidence interval based on given confidence level. 
 
-![Formula](http://pad3.whstatic.com/images/thumb/9/98/Calculate-Confidence-Interval-Step-5-Version-4.jpg/aid1383548-v4-728px-Calculate-Confidence-Interval-Step-5-Version-4.jpg)
+<img src="http://pad3.whstatic.com/images/thumb/9/98/Calculate-Confidence-Interval-Step-5-Version-4.jpg/aid1383548-v4-728px-Calculate-Confidence-Interval-Step-5-Version-4.jpg" width="248">
