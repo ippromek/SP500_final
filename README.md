@@ -19,7 +19,7 @@ Create Apache Spark instance via trait. Read csv file with feed data and convert
 ***Step #2***
 
 Transform dataset by calculating percent of difference between a current raw and previous one for column "SP500". 
-Final dataset consists of only one column with the percentage values.
+Final dataset consists of only one column with the percentage values. The calculations were performed with help of "LAG" Spark SQl function
 
 ***Step #3***
 
