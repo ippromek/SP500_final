@@ -35,11 +35,11 @@ object SP500_final extends InitSpark {
     require(confidenceLevel >0 && confidenceLevel<1, "Confidence level should be between 0 and 1")
     if (!new File(filePath).exists) throw new FileNotFoundException("File does not exist: "+filePath)
 
-    // Then run the main process via function composition
-    val readTransformCalc: (String) => (Double, Double) = {
-      readFile _ andThen transformDataframe andThen calcMeanCI
+    // Then run the main pipeline  via function composition
+    val readTransformCalculate: (String) => (Double, Double) = {
+      readFile _ andThen transformDataframe andThen calculateCI
     }
-    val ci = readTransformCalc(filePath)
+    val ci = readTransformCalculate(filePath)
 
     println(f"For confidence level $confidenceLevel%s confidence interval is [${ci._1}%.4f%% , ${ci._2}%.4f%%]")
     close
@@ -90,7 +90,7 @@ object SP500_final extends InitSpark {
     * @param confidenceLevel - confidence level (between 0 and 1) to calculate confidence interval
     * @return
     */
-  def calcMeanCI(df: DataFrame)(implicit confidenceLevel:Double): (Double, Double) =
+  def calculateCI(df: DataFrame)(implicit confidenceLevel:Double): (Double, Double) =
     try {
       // Create T Distribution with N-1 degrees of freedom
       val tDist: TDistribution = new TDistribution(df.count() - 1)
