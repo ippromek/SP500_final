@@ -14,12 +14,12 @@ Dataset can be found here [Link](https://fred.stlouisfed.org/series/SP500/downlo
 
 ***Step #1***
 
-Read csv file with feed data and convert it into Spark Dataset with case class records
+Create Apache Spark instance via trait. Read csv file with feed data and convert it into Spark Dataset with case class records. 
 
 ***Step #2***
 
 Transform dataset by calculating percent of difference between a current raw and previous one for column "SP500". 
-Final dataset consists of only one column with the percentage values.
+Final dataset consists of only one column with the percentage values. The calculations were performed with help of Spark SQL window function LAG.
 
 ***Step #3***
 
@@ -31,7 +31,7 @@ For given confidence level Z value calculated from T Distribution with N-1 degre
 
 <img src="http://www.biochemia-medica.com/system/files/18(2)_Simundic_lessons_tablica1.jpg"  width="250">
 
-Confidence interval is calculated via Scala function composition  - Step1 andThen Step2 andThen Step3
+Confidence interval is calculated as Tuple2  via Scala function composition  - Step1 andThen Step2 andThen Step3
 
 **Unit Testing**
 
